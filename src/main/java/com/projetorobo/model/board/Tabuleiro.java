@@ -25,8 +25,10 @@ public class Tabuleiro {
     public void moverRobo(Robo robo, Direcao dir) throws MovimentoInvalidoException, ColisaoComObstaculoException {
         robo.mover(dir);
 
-        if(verificarAlimento(robo))
+        if(verificarAlimento(robo)) {
             robo.setAchouAlimento(true);
+            robos.remove(robo);
+        }
 
         if (foraDoLimite(robo.getNewX(), robo.getNewY())) {
             robo.desfazerMovimento();
