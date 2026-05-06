@@ -57,7 +57,7 @@ public class TelaResultadoController {
             if(robo1.getAchouAlimento())
                 labelVencedor.setText(robo1.getCor().toString().substring(0, 1).toUpperCase() +
                         robo1.getCor().toString().substring(1).toLowerCase() + " Venceu!");
-            else {
+            else if(robo1.isExplodiu()){
                 labelVencedor.setText(robo1.getCor().toString().substring(0, 1).toUpperCase() +
                         robo1.getCor().toString().substring(1).toLowerCase() + " Perdeu!");
                 labelStatus.setText("O robô explodiu!");
@@ -71,6 +71,11 @@ public class TelaResultadoController {
             else if(robo2.getAchouAlimento())
                 labelVencedor.setText(robo2.getCor().toString().substring(0, 1).toUpperCase() +
                         robo2.getCor().toString().substring(1).toLowerCase() + " Venceu!!");
+
+            if(robo1.isExplodiu() && robo2.isExplodiu()) {
+                labelVencedor.setText("Game Over!");
+                labelStatus.setText("Os robos explodiram!");
+            }
         }
 
         if(modoDeJogo == Modo.COOPERATIVO){
@@ -78,12 +83,13 @@ public class TelaResultadoController {
                 labelVencedor.setText("A dupla Venceu!");
                 labelStatus.setText("Acharam o alimento!");
             }
+
+            if(robo1.isExplodiu() && robo2.isExplodiu()) {
+                labelVencedor.setText("Game Over!");
+                labelStatus.setText("Os robos explodiram!");
+            }
         }
 
-        if(robo1.isExplodiu() && robo2.isExplodiu()) {
-            labelVencedor.setText("Game Over!");
-            labelStatus.setText("Os robos explodiram!");
-        }
 
         if(modoDeJogo != Modo.USUARIO) {
             labelNomeRobo2.setText("Robô " + robo2.getCor().toString().substring(0, 1).toLowerCase() +
